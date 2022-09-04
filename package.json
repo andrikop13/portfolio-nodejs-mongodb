@@ -4,6 +4,9 @@
   "description": "Portfolio website backend service, written in Express.js and Mongoose",
   "main": "server.js",
   "scripts": {
+    "start": "nodemon server.js",
+    "start:prod": "NODE_ENV=production nodemon server.js",
+    "debug": "ndb server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -13,23 +13,17 @@ const signToken = (id) =>
 
 const createSendToken = (user, statusCode, req, res) => {
   const token = signToken(user._id);
-  const cookieOptions = {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 60 * 1000
-    ),
+  const expiresIn = parseInt(process.env.JWT_EXPIRES_IN) * 60 * 1000;
 
-    httpOnly: true, // cannot be accessed or modified by the browser, preventing cross-site scripting attacks.
-  };
-
-  if (process.env.NODE_ENV === "production") cookieOptions.secure = true; // is sent only on http(s) connnection
-
-  res.cookie("jwt", token, cookieOptions);
+  const expires = new Date(Date.now() + expiresIn);
 
   user.password = undefined; // remove the password only from the output
 
   res.status(statusCode).json({
     status: "success",
     token,
+    expires,
+    expiresIn: expiresIn,
     data: {
       user,
     },
@@ -88,7 +82,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
 
   // 4) Check if user change password after the token was issued
-  if (!currentUser.changedPasswordAfter(decoded.iat)) {
+  if (currentUser.changedPasswordAfter(decoded.iat)) {
     return next(
       new AppError("User recently changed password! Please login again", 401)
     );

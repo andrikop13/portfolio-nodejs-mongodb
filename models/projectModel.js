@@ -4,6 +4,7 @@ const validator = require("validator");
 const isBase64 = require("is-base64");
 
 const projectSchema = new mongoose.Schema({
+  id: String,
   title: {
     type: String,
     required: [true, "A project must have a title!"], // This is a validator
@@ -55,6 +56,10 @@ const projectSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+});
+
+projectSchema.pre("save", function () {
+  return (this.id = this._id);
 });
 
 // Query middleware to filter possible hidedProjects

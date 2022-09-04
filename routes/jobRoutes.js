@@ -11,8 +11,8 @@ router
 
 router
   .route("/:id")
-  .get(jobController.getJobById)
-  .patch(jobController.updateJob)
+  .get(authController.protect, jobController.getJobById)
+  .patch(authController.protect, jobController.updateJob)
   .delete(
     authController.protect,
     authController.restrictTo("admin"),

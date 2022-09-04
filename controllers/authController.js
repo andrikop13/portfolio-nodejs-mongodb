@@ -15,6 +15,7 @@ const createSendToken = (user, statusCode, req, res) => {
   const token = signToken(user._id);
   const expiresIn = parseInt(process.env.JWT_EXPIRES_IN) * 60 * 1000;
 
+  console.log(Date.now() + expiresIn);
   const expires = new Date(Date.now() + expiresIn);
 
   user.password = undefined; // remove the password only from the output

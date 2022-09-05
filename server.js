@@ -5,7 +5,7 @@ const {
   listenToUnhadledErrors,
 } = require("./utils/unhandledErrors");
 
-dotenv.config({ path: "./.env.development.local" });
+dotenv.config({ path: "./.env.production" });
 
 listenToUnCaughtExceptions();
 

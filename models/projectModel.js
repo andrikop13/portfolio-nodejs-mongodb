@@ -22,12 +22,25 @@ const projectSchema = new mongoose.Schema({
     type: String,
     required: [true, "A project is required to has a description!"],
   },
+  technologies_used: {
+    type: [String],
+    required: [true, "A project is required to has at least one used tool!"],
+    validate: {
+      validator: function (tools) {
+        return tools.length > 0;
+      },
+      message: "Project must have at least one technology tool!",
+    },
+  },
   images: {
     type: [String],
     required: [true, "A project is required to has at least one image"],
     validate: {
       validator: function (images) {
-        return images.every((img) => isBase64(img, { allowMime: true }));
+        return (
+          images.length > 0 &&
+          images.every((img) => isBase64(img, { allowMime: true }))
+        );
       },
       message: "Project images must be at base64 format!",
     },

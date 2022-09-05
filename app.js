@@ -38,7 +38,7 @@ const limiter = rateLimit({
 });
 app.use("/api", limiter);
 
-// Body parser: middlware that read data from body into req.body
+// Body parser
 app.use(express.json({ limit: "5mb" }));
 
 // Data sanitization against NoSQL query injection
@@ -50,7 +50,7 @@ app.use(xss());
 // Prevent parameter polution
 app.use(hpp());
 
-// app.use("/api/v1/projects", projectRouter);
+app.use("/api/v1/projects", projectRouter);
 app.use("/api/v1/jobs", jobRouter);
 app.use("/api/v1/users", userRouter);
 

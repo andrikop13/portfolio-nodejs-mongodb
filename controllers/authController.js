@@ -116,7 +116,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
   // 2) Generate the random reset
   const resetToken = user.createPasswordResetToken();
-  await user.save({ validateBeforeSave: false }); // without { validateBeforeSave: false } validators will create an error, asking for password
+  await user.save({ validateBeforeSave: false });
 
   // 3) Send it to user's email
   const resetURL = `${req.protocol}://${req.get(
@@ -156,7 +156,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   const user = await User.findOne({
     passwordResetToken: hashedToken,
-    passwordResetExpires: { $gt: Date.now() }, // Chech if token has not yet expired
+    passwordResetExpires: { $gt: Date.now() },
   });
 
   // 2) If token has not expired, and there is user, set the new password

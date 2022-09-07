@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const Job = require("../models/jobModel");
 const Project = require("../models/projectModel");
+const Skill = require("../models/skillModel");
 
 dotenv.config({ path: "./.env.development.local" });
 
@@ -26,6 +27,7 @@ const jobs = JSON.parse(fs.readFileSync(`${__dirname}/jobs.json`, "utf-8"));
 const projects = JSON.parse(
   fs.readFileSync(`${__dirname}/projects.json`, "utf-8")
 );
+const skills = JSON.parse(fs.readFileSync(`${__dirname}/skills.json`, "utf-8"));
 
 // IMPORT DATA INTO DB
 const importData = async () => {
@@ -41,9 +43,12 @@ const importData = async () => {
     return projectObj[id];
   });
 
+  const saveSkills = skills.skills;
+
   try {
     await Job.create(saveJobs);
     await Project.create(saveProjects);
+    await Skill.create(saveSkills);
 
     console.log("Data succesfully loaded");
     process.exit();

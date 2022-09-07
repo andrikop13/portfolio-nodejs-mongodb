@@ -13,6 +13,7 @@ const globalErrorHandler = require("./controllers/errorController");
 const projectRouter = require("./routes/projectRoutes");
 const jobRouter = require("./routes/jobRoutes");
 const userRouter = require("./routes/userRoutes");
+const skillRouter = require("./routes/skillRoutes");
 
 const app = express();
 
@@ -53,6 +54,7 @@ app.use(hpp());
 app.use("/api/v1/projects", projectRouter);
 app.use("/api/v1/jobs", jobRouter);
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/skills", skillRouter);
 
 // Middlware for not found router
 app.all("*", (req, res, next) => {

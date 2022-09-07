@@ -12,7 +12,7 @@
 
 # About The Project
 
-This project is a REST API that provides all the CRUD operations are needed for my portfolio website ( <a href="https://github.com/andrikop13/my-portfolio" target="_blank">repository</a> ) to be functional. I has implemented three main routes that handle requests for projects, jobs and users, by also using authentication & authorization controllers. Moreover, i used strategies such as data sanitization to prevent NoSQL query injection and cross-site-scripting, as well as libraries to prevent parameter pollution and set rate limits of the HTTP requests that the same IP can send to the server.
+This project is a REST API that provides all the CRUD operations are needed for my portfolio website ( <a href="https://github.com/andrikop13/my-portfolio" target="_blank">repository</a> ) to be functional. I has implemented four main routes that handle requests for projects, jobs, skills and users, by also using authentication & authorization controllers. Moreover, i used strategies such as data sanitization to prevent NoSQL query injection and cross-site-scripting, as well as libraries to prevent parameter pollution and set rate limits of the HTTP requests that the same IP can send to the server.
 
 ## Built with
 

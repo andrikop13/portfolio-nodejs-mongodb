@@ -40,10 +40,9 @@ const sendErrorProd = (err, res) => {
       message: err.message,
     });
   } else {
-    // 1) Log error
     console.error("ERROR 🥵", err);
 
-    // 2) Send generic message
+    // Send generic message
     res.status(500).json({
       status: "error",
       message: "Something went very wrong",
